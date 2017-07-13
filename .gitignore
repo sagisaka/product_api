@@ -1,6 +1,9 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
+src/main/resources/static/image/*
+!.gitkeep
+
 ### STS ###
 .apt_generated
 .classpath
