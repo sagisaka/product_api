@@ -14,7 +14,8 @@ function escape_html (string) {
 	});
 }
 
-function create(){//	アップロードボタンを押下した
+function updata() {
+	// 多重送信を防ぐため通信完了までボタンをdisableにする
 	var button = $(this);
 	button.attr("disabled", true);
 	//処理に不足があるか
@@ -31,6 +32,7 @@ function create(){//	アップロードボタンを押下した
 		alert('fileを選択してください');
 		return;
 	}
+	// 各フィールドから値を取得してJSONデータを作成
 	name = escape_html($("#name").val());
 	introduction = escape_html($("#introduction").val());
 	price = escape_html($("#price").val()+"円");
@@ -38,31 +40,49 @@ function create(){//	アップロードボタンを押下した
 	formData.append("name",name);
 	formData.append("introduction",introduction);
 	formData.append("price",price);
+
+	// 通信実行
 	$.ajax({
-		url:'/api/product/',
-		method:'post',
+		type:"POST",               
+		url:"/api/product/"+$("#s").text(),       
 		data:formData,
 		processData:false,
 		contentType:false,
 		cache: false,
 		dataType: 'json',
-		success: function(json) {
-			alert("画像を更新するためOK押下後、10秒間お待ちください！");
-			sleep(10000);
-			document.location = "/";
+
+		success: function(json_data) {
+			location.reload();
 		},
 		error: function() {         // HTTPエラー時
 			alert("Server Error. Pleasy try again later.");
 		},
-		complete: function() {
-			button.attr("disabled", false);
+		complete: function() {      
+			button.attr("disabled", false);  
 		}
-	})
+	});
 }
 
-function sleep(waitMsec) {
-	var startMsec = new Date();
-	while (new Date() - startMsec < waitMsec);
+function deleteData() {
+
+	var button = $(this);
+	button.attr("disabled", true);
+	if(window.confirm('この商品のデータを消しますか？')){
+
+		$.ajax({
+			type:"DELETE",              
+			url:"/api/product/"+$("#s").text(),       
+			success: function() {   
+				document.location = "/";		
+			},
+			error: function() {         // HTTPエラー時
+				alert("Server Error. Pleasy try again later.");
+			},
+			complete: function() {      
+				button.attr("disabled", false);  
+			}
+		});
+	}
 }
 
 $(function(){
@@ -72,16 +92,13 @@ $(function(){
 		reader = new FileReader(),
 		$preview = $(".preview");
 		t = this;
-
 		// 画像ファイル以外の場合は何もしない
 		if(file.type.indexOf("image") < 0){
 			return false;
 		}
-
 		// ファイル読み込みが完了した際のイベント登録
 		reader.onload = (function(file) {
 			return function(e) {
-				//既存のプレビューを削除
 				$preview.empty();
 				$preview.append($('<img>').attr({
 					src: e.target.result,

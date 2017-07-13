@@ -1,34 +1,5 @@
-target/
-!.mvn/wrapper/*
 
-src/main/resources/static/image/*
-!.gitkeep
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-
-# Created by https://www.gitignore.io/api/java,macos,eclipse
-
+# Created by https://www.gitignore.io/api/java,macos
 
 ### Java ###
 # Compiled class file
@@ -81,4 +52,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.gitignore.io/api/java,macos,eclipse
+# End of https://www.gitignore.io/api/java,macos
