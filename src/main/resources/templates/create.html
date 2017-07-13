@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>作成ページ</title>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+	th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+<script src="/js/createData.js"></script>
+<link href="css/style.css" th:href="@{css/style.css}" rel="stylesheet"></link>
+<link href="css/form.css" th:href="@{css/form.css}" rel="stylesheet"></link>
+
+</head>
+<body>
+
+	<ul id="menu">
+		<li id="menu01"><a href="/" class="pageChange">TOP</a></li>
+		<li id="menu02"><a href="/create" class="pageChange">CREATE</a></li>
+	</ul>
+
+	<div class="create_page">
+		<span class="box-title">商品の紹介</span>
+		<form id="form" enctype="multipart/form-data">
+			<label class="name-label" for="name">商品の名前</label>
+			<div class="create_name">
+				<textarea rows="2" cols="50" maxlength='100' id="name"
+					placeholder='商品の名前を入力してください'></textarea>
+			</div>
+			<label class="introduction-label" for="name">商品の説明</label>
+			<div class="create_introduction">
+				<textarea rows="10" cols="50" maxlength='500' id="introduction"
+					placeholder='商品の説明を入力してください'></textarea>
+			</div>
+			<label class="price-label" for="name">商品の価格</label>
+			<div class="create_price">
+				<textarea rows="2" cols="50" id="price" placeholder='商品の価格を入力してください'></textarea>
+			</div>
+			<div class="create_file">
+				<input id="file" type="file" name="file" required="required" />
+			</div>
+			<div class="preview"></div>
+
+			<div class="create_upload">
+				<input type="button" id="upload" onClick="create()" value="アップロード" />
+			</div>
+
+		</form>
+	</div>
+
+</body>
+</html>
