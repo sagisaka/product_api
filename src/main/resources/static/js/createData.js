@@ -54,8 +54,8 @@ function create(){//	アップロードボタンを押下した
 		error: function() {         // HTTPエラー時
 			alert("Server Error. Pleasy try again later.");
 		},
-		complete: function() {     
-			button.attr("disabled", false); 
+		complete: function() {
+			button.attr("disabled", false);
 		}
 	})
 }
