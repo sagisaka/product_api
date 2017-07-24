@@ -1,4 +1,4 @@
-package com.spring.app;
+package com.spring.app.controller;
 
 
 
@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.spring.app.ProductsService;
+import com.spring.app.model.Product;
 
 
 

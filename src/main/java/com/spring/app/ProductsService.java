@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.app.model.Product;
+import com.spring.app.repository.ProductsRepository;
+
 @Service  
 @Transactional
 public class ProductsService {

@@ -14,7 +14,7 @@ function escape_html (string) {
 	});
 }
 
-function create(){//	アップロードボタンを押下した
+function create(){
 	var button = $(this);
 	button.attr("disabled", true);
 	//処理に不足があるか
@@ -47,7 +47,7 @@ function create(){//	アップロードボタンを押下した
 		cache: false,
 		dataType: 'json',
 		success: function(json) {
-			alert("画像を更新するためOK押下後、10秒間お待ちください！");
+			alert("画像を更新するためOK押した後、10秒間お待ちください！");
 			sleep(10000);
 			document.location = "/";
 		},

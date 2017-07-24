@@ -15,7 +15,6 @@ function escape_html (string) {
 }
 
 function updata() {
-	// 多重送信を防ぐため通信完了までボタンをdisableにする
 	var button = $(this);
 	button.attr("disabled", true);
 	//処理に不足があるか
@@ -43,8 +42,8 @@ function updata() {
 
 	// 通信実行
 	$.ajax({
-		type:"POST",               
-		url:"/api/product/"+$("#s").text(),       
+		type:"POST",
+		url:"/api/product/"+$("#s").text(),
 		data:formData,
 		processData:false,
 		contentType:false,
@@ -57,8 +56,8 @@ function updata() {
 		error: function() {         // HTTPエラー時
 			alert("Server Error. Pleasy try again later.");
 		},
-		complete: function() {      
-			button.attr("disabled", false);  
+		complete: function() {
+			button.attr("disabled", false);
 		}
 	});
 }
@@ -70,16 +69,16 @@ function deleteData() {
 	if(window.confirm('この商品のデータを消しますか？')){
 
 		$.ajax({
-			type:"DELETE",              
-			url:"/api/product/"+$("#s").text(),       
-			success: function() {   
-				document.location = "/";		
+			type:"DELETE",
+			url:"/api/product/"+$("#s").text(),
+			success: function() {
+				document.location = "/";
 			},
 			error: function() {         // HTTPエラー時
 				alert("Server Error. Pleasy try again later.");
 			},
-			complete: function() {      
-				button.attr("disabled", false);  
+			complete: function() {
+				button.attr("disabled", false);
 			}
 		});
 	}
