@@ -3,7 +3,7 @@
  - Java 1.8
  - Spring Boot 1.5.4
  - H2
- 
+
 ## 全体の設計・構成についての説明
 
 画面構成は、
@@ -17,9 +17,6 @@
 1. このプロジェクトを git clone する
 2. プロジェクト内に移動し、 mvn spring-boot:run でSpringを起動する。
 3. 起動後は、 localhost:8080 でページに移動できる。
-
-ただし現在は、eclipseからの実行を想定している。
-eclipseのリフレッシュ機能を入れないと画像が読み込まれないです。
 
 ## 画面ごとの内容
 
@@ -69,4 +66,3 @@ DBに登録すると、商品のタイトルや価格の一覧が表として書
 |一覧ページの表示|GET|/api/product/|
 |詳細ページの表示|GET|/api/product/{id}|
 |作成ページの表示|GET|/api/product/create|
- 
