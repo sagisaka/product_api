@@ -10,23 +10,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity  
-@Table(name="product")  
-@Data  
-@AllArgsConstructor  
-@NoArgsConstructor 
+@Entity
+@Table(name="product")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
-	@Id  
-	@GeneratedValue  
+	@Id
+	@GeneratedValue
 	private Integer id;
 
-	@Column(nullable=false) 
+	@Column(nullable=false)
 	private String name;
 
-	@Column(nullable=false)  
+	@Column(nullable=false)
 	private String introduction;
 
-	@Column(nullable=false)  
+	@Column(nullable=false)
 	private String price;
 
 	@Column(nullable=false)

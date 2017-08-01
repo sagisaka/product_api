@@ -53,7 +53,7 @@ public class ProductsRestController {
 	// 顧客一件更新
 	@PostMapping(value="{id}")
 	public Product putproduct(@PathVariable Integer id,
-			HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) {
+	HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) {
 
 		if (file.isEmpty()) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -66,7 +66,7 @@ public class ProductsRestController {
 		product.setImageUrl(file.getOriginalFilename());
 		product.setId(id);
 		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+		BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
 			FileCopyUtils.copy(in, out);
 		} catch (IOException e) {
 			throw new RuntimeException("Error uploading file.", e);
@@ -97,7 +97,7 @@ public class ProductsRestController {
 		service.create(product);
 		// アップロードされたファイルを保存。
 		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+		BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
 			FileCopyUtils.copy(in, out);
 		} catch (IOException e) {
 			throw new RuntimeException("Error uploading file.", e);
