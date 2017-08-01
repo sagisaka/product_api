@@ -63,6 +63,6 @@ DBに登録すると、商品のタイトルや価格の一覧が表として書
 |顧客取得|POST|/api/product/sam|
 |顧客一件更新|POST|/api/product/{id}|
 |顧客一件削除|DELETE|/api/product/{id}|
-|一覧ページの表示|GET|/api/product/|
-|詳細ページの表示|GET|/api/product/{id}|
-|作成ページの表示|GET|/api/product/create|
+|一覧ページの表示|GET|/|
+|詳細ページの表示|GET|/{id}|
+|作成ページの表示|GET|/create|

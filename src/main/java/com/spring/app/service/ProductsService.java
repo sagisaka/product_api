@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.app.model.Product;
 import com.spring.app.repository.ProductsRepository;
 
-@Service  
+@Service
 @Transactional
 public class ProductsService {
 	@Autowired
-	ProductsRepository repository; 
+	ProductsRepository repository;
 
 	// 顧客全件取得
 	public List<Product> findAll() {
@@ -31,17 +31,17 @@ public class ProductsService {
 	}
 
 	// 顧客一件作成
-	public Product create(Product product) { 
+	public Product create(Product product) {
 		return repository.save(product);
 	}
 
 	// 顧客一件更新
-	public Product update(Product product) {   
+	public Product update(Product product) {
 		return repository.save(product);
 	}
 
 	// 顧客一件削除
-	public void delete(Integer id) { 
+	public void delete(Integer id) {
 		repository.delete(id);
 	}
 }

@@ -12,8 +12,8 @@ import com.spring.app.service.ProductsService;
 
 @Controller
 public class WebController {
-	@Autowired  
-	ProductsService service;  
+	@Autowired
+	ProductsService service;
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index() {
@@ -35,4 +35,3 @@ public class WebController {
 		return "create";
 	}
 }
-
