@@ -13,10 +13,7 @@
 <link href="css/detail.css" th:href="@{css/detail.css}" rel="stylesheet"></link>
 </head>
 <body>
-	<ul id="menu">
-		<li id="menu01"><a href="/" class="pageChange">TOP</a></li>
-		<li id="menu02"><a href="/create" class="pageChange">CREATE</a></li>
-	</ul>
+	<div th:replace="temp :: header"></div>
 
 	<table class="type">
 		<thead>
@@ -73,6 +70,7 @@
 	</div>
 
 	<button id="delete" type="button" onClick="deleteData()">データの消去</button>
+	<div th:replace="temp :: footer"></div>
 
 </body>
 </html>

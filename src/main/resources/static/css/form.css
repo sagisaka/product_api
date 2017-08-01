@@ -34,14 +34,15 @@ textarea:focus {
 	top: 30px;
 	margin: 10px;
 }
+
 .create_page .preview {
 	margin: 10px;
 	padding: 0.5em 1.5em;
 	text-align: center;
 }
+
 .create_page .create_upload {
 	position: relative;
 	top: 10px;
 	margin: 10px;
 }
-

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.spring.app.model.Product;
 
 public interface ProductsRepository
-    extends JpaRepository<Product, Integer> {   
+extends JpaRepository<Product, Integer> {   
 	List<Product> findByName(String find);
 }
