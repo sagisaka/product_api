@@ -15,14 +15,7 @@
 <link href="css/table.css" th:href="@{css/table.css}" rel="stylesheet"></link>
 </head>
 <body>
-
-
-	<ul id="menu">
-		<li id="menu01"><a href="/" class="pageChange">TOP</a></li>
-		<li id="menu02"><a href="/create" class="pageChange">CREATE</a></li>
-	</ul>
-
-
+	<div th:replace="temp :: header"></div>
 	<form class="search">
 		<div>
 			<label class="name-label" for="name">タイトル検索</label>
@@ -51,5 +44,8 @@
 		<tbody id="output">
 		</tbody>
 	</table>
+
+	<div th:replace="temp :: footer"></div>
+
 </body>
 </html>

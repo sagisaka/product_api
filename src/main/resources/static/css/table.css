@@ -4,17 +4,20 @@ table.type {
 	line-height: 1.5;
 	border: 1px solid #ccc;
 }
+
 table.type thead {
 	border-right: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	background: #04162e;
 }
+
 table.type thead th {
 	padding: 10px;
 	font-weight: bold;
 	vertical-align: top;
 	color: #fff;
 }
+
 table.type tbody th {
 	width: 150px;
 	padding: 10px;
@@ -23,6 +26,7 @@ table.type tbody th {
 	border-bottom: 1px solid #ccc;
 	background: #efefef;
 }
+
 table.type td {
 	width: 350px;
 	padding: 10px;

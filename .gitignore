@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/java,macos,maven,eclipse
 
+### db ###
+db/
+
 ### Java ###
 # Compiled class file
 *.class
