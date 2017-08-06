@@ -54,15 +54,17 @@ DBに登録すると、商品のタイトルや価格の一覧が表として書
 編集は作成と同様に全ての項目を入力しなければならない。
 また、その商品のデータを消去するボタンもあります。
 
-## API
+## API一覧
 |api名|HTTPメソッド|リソースパス|
 |---|---|---|
-|顧客一件作成|POST|/api/product/|
-|顧客全件取得|GET|/api/product/all|
-|顧客一件取得|GET|/api/product/{id}|
-|顧客取得|POST|/api/product/sam|
-|顧客一件更新|POST|/api/product/{id}|
-|顧客一件削除|DELETE|/api/product/{id}|
+|商品一件作成|POST|/api/product/|
+|商品一件取得|GET|/api/product/{id}|
+|商品一件更新|POST|/api/product/{id}|
+|商品一件削除|DELETE|/api/product/{id}|
+|商品全件取得|GET|/api/product/all|
+|商品取得|POST|/api/product/sam|
+
+## ページ一覧
 |一覧ページの表示|GET|/|
 |詳細ページの表示|GET|/{id}|
 |作成ページの表示|GET|/create|
