@@ -1,28 +1,24 @@
 package com.spring.app.controller.rest;
 
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.spring.app.model.Product;
 import com.spring.app.service.ProductsService;
 
@@ -39,9 +35,14 @@ public class ProductsRestController {
 	}
 
 	// 顧客一件取得
-	@GetMapping(value="{id}")
+	@GetMapping(value="{id:[0-9]+$}")
 	public Product getproduct(@PathVariable Integer id) {
-		return service.findOne(id);
+		Product pro = service.findOne(id);
+		if(pro == null){
+			Product product = new Product();
+			return product;
+		}
+		return pro;
 	}
 
 	//　顧客取得
@@ -51,7 +52,7 @@ public class ProductsRestController {
 	}
 
 	// 顧客一件更新
-	@PostMapping(value="{id}")
+	@PostMapping(value="{id:[0-9]+$}")
 	public Product putproduct(@PathVariable Integer id,
 	HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) {
 
@@ -75,16 +76,16 @@ public class ProductsRestController {
 	}
 
 	// 顧客一件削除
-	@RequestMapping(method=RequestMethod.DELETE, value="{id}")
+	@DeleteMapping(value="{id:[0-9]+$}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteproduct(@PathVariable Integer id) {
 		service.delete(id);
 	}
 
 	// 顧客一件登録
-	@RequestMapping(method=RequestMethod.POST)
+	@PostMapping
 	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file){
-
+		
 		if (file.isEmpty()) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
@@ -104,5 +105,4 @@ public class ProductsRestController {
 		}
 		return product;
 	}
-
 }

@@ -15,7 +15,6 @@
 </head>
 <body>
 	<div th:replace="temp :: header"></div>
-
 	<table class="type">
 		<thead>
 			<tr>
@@ -39,9 +38,7 @@
 		<div class="box-title">商品の紹介</div>
 		<p th:text="${introduction}"></p>
 	</div>
-
 	<hr></hr>
-
 	<div class="create_page">
 		<span class="box-title">商品の更新</span>
 		<form id="form" enctype="multipart/form-data">
@@ -69,9 +66,7 @@
 			</div>
 		</form>
 	</div>
-
 	<button id="delete" type="button" onClick="deleteData()">データの消去</button>
 	<div th:replace="temp :: footer"></div>
-
 </body>
 </html>

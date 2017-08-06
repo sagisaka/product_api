@@ -1,11 +1,9 @@
 package com.spring.app.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.spring.app.model.Product;
 import com.spring.app.repository.ProductsRepository;
 
@@ -13,7 +11,7 @@ import com.spring.app.repository.ProductsRepository;
 @Transactional
 public class ProductsService {
 	@Autowired
-	ProductsRepository repository;
+	private ProductsRepository repository;
 
 	// 顧客全件取得
 	public List<Product> findAll() {

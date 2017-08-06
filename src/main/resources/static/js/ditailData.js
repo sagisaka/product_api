@@ -33,7 +33,6 @@ function updata() {
 			contentType:false,
 			cache: false,
 			dataType: 'json',
-
 			success: function(json_data) {
 				location.reload();
 			},

@@ -29,7 +29,6 @@ function search() {
 			url:"/api/product/sam",
 			data:JSON.stringify(data),
 			contentType: 'application/json',
-
 			success: function(json) {
 				$('#output').empty();
 				for(var i in json){

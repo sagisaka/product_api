@@ -10,13 +10,9 @@
 	<script src="/js/image.js"></script>
 	<link href="css/style.css" th:href="@{css/style.css}" rel="stylesheet"></link>
 	<link href="css/form.css" th:href="@{css/form.css}" rel="stylesheet"></link>
-
 </head>
 <body>
-
 	<div th:replace="temp :: header"></div>
-
-
 	<div class="create_page">
 		<span class="box-title">商品の紹介</span>
 		<form id="form" enctype="multipart/form-data">
@@ -42,10 +38,8 @@
 			<div class="create_upload">
 				<input type="button" id="upload" onClick="create()" value="アップロード" />
 			</div>
-
 		</form>
 	</div>
 	<div th:replace="temp :: footer"></div>
-
 </body>
 </html>
