@@ -21,7 +21,6 @@ function search() {
 		name = escape_html($("#name").val());
 		var data = {
 			name: name,
-			price: null
 		};
 		// 通信実行
 		$.ajax({

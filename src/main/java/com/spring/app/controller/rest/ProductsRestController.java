@@ -28,30 +28,30 @@ public class ProductsRestController {
 	@Autowired
 	private ProductsService service;
 
-	// 顧客全件取得
+	// 商品全件取得
 	@GetMapping(value="/all")
 	public List<Product> getproduct() {
 		return service.findAll();
 	}
 
-	// 顧客一件取得
+	// 商品一件取得
 	@GetMapping(value="{id:[0-9]+$}")
 	public Product getproduct(@PathVariable Integer id) {
-		Product pro = service.findOne(id);
-		if(pro == null){
+		Product flag = service.findOne(id);
+		if(flag == null){
 			Product product = new Product();
 			return product;
 		}
-		return pro;
+		return flag;
 	}
 
-	//　顧客取得
+	//　商品取得
 	@PostMapping(value="/sam")
 	public List<Product> getValueproduct(@RequestBody Product product) {
 		return service.find(product.getName());
 	}
 
-	// 顧客一件更新
+	// 商品一件更新
 	@PostMapping(value="{id:[0-9]+$}")
 	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) {
 
@@ -74,14 +74,14 @@ public class ProductsRestController {
 		return service.update(product);
 	}
 
-	// 顧客一件削除
+	// 商品一件削除
 	@DeleteMapping(value="{id:[0-9]+$}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteproduct(@PathVariable Integer id) {
 		service.delete(id);
 	}
 
-	// 顧客一件登録
+	// 商品一件登録
 	@PostMapping
 	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file){
 
