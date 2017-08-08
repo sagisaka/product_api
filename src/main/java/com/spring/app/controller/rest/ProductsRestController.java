@@ -35,14 +35,19 @@ public class ProductsRestController {
 	}
 
 	// 商品一件取得
-	@GetMapping(value="{id:[0-9]+$}")
-	public Product getproduct(@PathVariable Integer id) {
-		Product flag = service.findOne(id);
-		if(flag == null){
-			Product product = new Product();
+	@GetMapping(value="{id}")
+	public Product getProduct(@PathVariable String id) {
+		try {
+			Integer id_number = Integer.parseInt(id);
+			Product product = service.findOne(id_number);
+			if(product == null){
+				product = new Product();
+				return product;
+			}
 			return product;
-		}
-		return flag;
+		} catch (NumberFormatException e) {
+			return new Product();
+		}		
 	}
 
 	//　商品取得
