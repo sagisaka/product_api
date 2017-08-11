@@ -23,7 +23,7 @@ public class WebController {
 		try {
 			Product product = service.findOne(Integer.parseInt(id));
 			if(product == null){
-				return "detail";
+				return "nullDetail";
 			}
 			model.addAttribute("image","/image/"+product.getImageUrl());
 			model.addAttribute("introduction",product.getIntroduction());
@@ -31,7 +31,7 @@ public class WebController {
 			model.addAttribute("data",service.findOne(Integer.parseInt(id)));
 			return "detail";
 		} catch (NumberFormatException e) {
-			return "detail";
+			return "nullDetail";
 		}				
 	}
 
