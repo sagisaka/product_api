@@ -23,11 +23,10 @@
 |ステータス|説明|
 |---|---|
 |201|商品の登録が成功する|
-|300|name introduction price imageUrlのいずれかがnullならば"〇〇を入力してください"とエラー内容を返却する|
+|300|name introduction price imageUrlのいずれかが空データならば"〇〇を入力してください"とエラー内容を返却する|
 |300|priceが文字列ならば"数値を入力してください"とエラー内容を返却する|
-|400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば受け付けない|
-|400|"Server Error. Pleasy try again later."とエラー内容を返却する|
-|500|送信内容がnullならBAD_REQUESTを返却する|
+|400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
+|500|送信内容が空データならBAD_REQUESTを返却する|
 
 ### 商品一件取得
 * GETデータ
@@ -44,8 +43,8 @@
 |ステータス|説明|
 |---|---|
 |200|登録されたidならば登録されたデータを取得する|
-|301|登録されていないidならばnullが入ったデータを取得する|
-|400|"Server Error. Pleasy try again later."とエラー内容を返却する|
+|301|登録されていないidならば空データを取得する|
+|400|受け取れなければ"Server Error. Pleasy try again later."とエラー内容を返却する|
 
 
 ### 商品一件更新
@@ -63,11 +62,10 @@
 |ステータス|説明|
 |---|---|
 |201|formデータで送信するため上書きで登録する|
-|300|name introduction price imageUrlのいずれかがnullならば"〇〇を入力してください"とエラー内容を返却する|
+|300|name introduction price imageUrlのいずれかが空データならば"〇〇を入力してください"とエラー内容を返却する|
 |300|priceが文字列ならば"数値を入力してください"とエラー内容を返却する|
-|400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば受け付けない|
-|400|"Server Error. Pleasy try again later."とエラー内容を返却する|
-|500|送信内容がnullならBAD_REQUESTを返却する|
+|400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
+|500|送信内容が空データならBAD_REQUESTを返却する|
 
 ### 商品一件削除
 * DELETEデータ
@@ -100,7 +98,7 @@
 |---|---|
 |200|登録されたid全てのデータを取得する|
 |300|登録されていないならば空データを取得する|
-|400|"Server Error. Pleasy try again later."とエラー内容を返却する|
+|400|受け取れなければ"Server Error. Pleasy try again later."とエラー内容を返却する|
 
 
 ### 商品取得
@@ -124,6 +122,8 @@
 
 |ステータス|説明|
 |---|---|
-|200|取得したいデータを取得する 該当しなければ空を返す|
-|400|"Server Error. Pleasy try again later."とエラー内容を返却する|
+|200|取得したいデータを取得する|
+|300|該当しなければ空データを返す|
+|400|受け取れなければ"Server Error. Pleasy try again later."とエラー内容を返却する|
+|400|nameの文字数が100以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
 
