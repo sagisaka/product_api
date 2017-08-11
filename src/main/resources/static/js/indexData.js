@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	allData();
 	$("#search_get").click(function(){
-		create();
+		search();
 	});
 });
 
@@ -13,10 +13,13 @@ function allData(){
 			for(var i in json){
 				$("#output").append("<tr> <th scope=row>" + json[i].id + "</th> <td> <img id=img src=/image/"+json[i].imageUrl+"  width=100/> </td> <td> " + json[i].name + "</td> <td>"+ json[i].price + "円 </td> <td><a href="+ json[i].id +">詳細ページへ</a></td> </tr>");
 			}
+		},
+		error: function() {         // HTTPエラー時
+			alert("Server Error. Pleasy try again later.");
 		}
 	});
 }
-function create(){
+function search(){
 	var button = $(this);
 	button.attr("disabled", true);
 	$.getScript("js/escape.js", function(){
