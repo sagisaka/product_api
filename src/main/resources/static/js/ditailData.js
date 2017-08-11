@@ -1,3 +1,11 @@
+$(document).ready(function() {
+	$("#delete").click(function(){
+		deleteData();
+	});
+	$("#upload").click(function(){
+		updata();
+	});
+});
 function updata() {
 	var button = $(this);
 	button.attr("disabled", true);
@@ -45,7 +53,6 @@ function updata() {
 		});
 	});
 }
-
 function deleteData() {
 	var button = $(this);
 	button.attr("disabled", true);

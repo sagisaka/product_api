@@ -1,3 +1,8 @@
+$(document).ready(function() {
+	$("#create").click(function(){
+		create();
+	});
+});
 function create(){
 	var button = $(this);
 	button.attr("disabled", true);

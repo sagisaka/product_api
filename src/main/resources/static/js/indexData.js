@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	allData();
+	$("#search_get").click(function(){
+		create();
+	});
 });
 
 function allData(){
@@ -13,14 +16,13 @@ function allData(){
 		}
 	});
 }
-
-function search() {
+function create(){
 	var button = $(this);
 	button.attr("disabled", true);
 	$.getScript("js/escape.js", function(){
 		name = escape_html($("#name").val());
 		var data = {
-			name: name,
+				name: name,
 		};
 		// 通信実行
 		$.ajax({
