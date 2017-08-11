@@ -27,6 +27,7 @@ public class WebController {
 			}
 			model.addAttribute("image","/image/"+product.getImageUrl());
 			model.addAttribute("introduction",product.getIntroduction());
+			model.addAttribute("price",product.getPrice()+"円");
 			model.addAttribute("data",service.findOne(Integer.parseInt(id)));
 			return "detail";
 		} catch (NumberFormatException e) {

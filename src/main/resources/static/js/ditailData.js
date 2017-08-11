@@ -19,6 +19,9 @@ function updata() {
 	}else if($("#price").val().length==0){
 		alert('価格を入力してください');
 		return;
+	}else if(isNaN($("#price").val())){
+		alert('数値を入力してください');
+		return;
 	}else if($("#file").val().length==0){
 		alert('fileを選択してください');
 		return;
@@ -27,7 +30,7 @@ function updata() {
 	$.getScript("js/escape.js", function(){
 		name = escape_html($("#name").val());
 		introduction = escape_html($("#introduction").val());
-		price = escape_html($("#price").val()+"円");
+		price = escape_html($("#price").val());
 		var formData = new FormData($('#form').get()[0]);
 		formData.append("name",name);
 		formData.append("introduction",introduction);

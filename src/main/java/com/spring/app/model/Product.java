@@ -34,7 +34,7 @@ public class Product {
 
 	@Column(nullable=false)
 	@NotNull
-	private String price;
+	private Integer price;
 
 	@Column(nullable=false)
 	@NotNull
