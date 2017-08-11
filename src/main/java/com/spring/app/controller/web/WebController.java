@@ -3,9 +3,8 @@ package com.spring.app.controller.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import com.spring.app.model.Product;
 import com.spring.app.service.ProductsService;
 
@@ -14,22 +13,28 @@ public class WebController {
 	@Autowired
 	ProductsService service;
 
-	@RequestMapping(value="/",method=RequestMethod.GET)
+	@GetMapping(value="/")
 	public String index() {
 		return "index";
 	}
 
-	@RequestMapping(value="/{id}")
+	@GetMapping(value="/{id}")
 	public String detail(@PathVariable("id") String id, Model model) {
-		Product p = new Product();
-		p = service.findOne(Integer.parseInt(id));
-		model.addAttribute("image","/image/"+p.getImageUrl());
-		model.addAttribute("introduction",p.getIntroduction());
-		model.addAttribute("data",service.findOne(Integer.parseInt(id)));
-		return "detail";
+		try {
+			Product product = service.findOne(Integer.parseInt(id));
+			if(product == null){
+				return "detail";
+			}
+			model.addAttribute("image","/image/"+product.getImageUrl());
+			model.addAttribute("introduction",product.getIntroduction());
+			model.addAttribute("data",service.findOne(Integer.parseInt(id)));
+			return "detail";
+		} catch (NumberFormatException e) {
+			return "detail";
+		}				
 	}
 
-	@RequestMapping(value="/create",method=RequestMethod.GET)
+	@GetMapping(value="/create")
 	public String create() {
 		return "create";
 	}

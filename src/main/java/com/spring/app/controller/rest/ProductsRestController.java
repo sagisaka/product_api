@@ -38,8 +38,7 @@ public class ProductsRestController {
 	@GetMapping(value="{id}")
 	public Product getProduct(@PathVariable String id) {
 		try {
-			Integer id_number = Integer.parseInt(id);
-			Product product = service.findOne(id_number);
+			Product product = service.findOne(Integer.parseInt(id));
 			if(product == null){
 				product = new Product();
 				return product;
