@@ -14,7 +14,7 @@
 	<link href="css/detail.css" th:href="@{css/detail.css}" rel="stylesheet"></link>
 </head>
 <body>
-	<div th:replace="temp :: header"></div>
+	<div th:replace="template :: header"></div>
 	<table class="type">
 		<thead>
 			<tr>
@@ -67,6 +67,6 @@
 		</form>
 	</div>
 	<button id="delete" type="button" onClick="deleteData()">データの消去</button>
-	<div th:replace="temp :: footer"></div>
+	<div th:replace="template :: footer"></div>
 </body>
 </html>

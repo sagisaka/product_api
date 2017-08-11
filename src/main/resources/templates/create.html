@@ -12,7 +12,7 @@
 	<link href="css/form.css" th:href="@{css/form.css}" rel="stylesheet"></link>
 </head>
 <body>
-	<div th:replace="temp :: header"></div>
+	<div th:replace="template :: header"></div>
 	<div class="create_page">
 		<span class="box-title">商品の紹介</span>
 		<form id="form" enctype="multipart/form-data">
@@ -40,6 +40,6 @@
 			</div>
 		</form>
 	</div>
-	<div th:replace="temp :: footer"></div>
+	<div th:replace="template :: footer"></div>
 </body>
 </html>

@@ -10,7 +10,7 @@
 	<link href="css/table.css" th:href="@{css/table.css}" rel="stylesheet"></link>
 </head>
 <body>
-	<div th:replace="temp :: header"></div>
+	<div th:replace="template :: header"></div>
 	<form class="search">
 		<div>
 			<label class="name-label" for="name">タイトル検索</label>
@@ -37,6 +37,6 @@
 		<tbody id="output">
 		</tbody>
 	</table>
-	<div th:replace="temp :: footer"></div>
+	<div th:replace="template :: footer"></div>
 </body>
 </html>
