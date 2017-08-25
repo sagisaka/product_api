@@ -1,9 +1,16 @@
 package com.spring.app.service;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.spring.app.model.Product;
 import com.spring.app.repository.ProductsRepository;
 
@@ -29,12 +36,35 @@ public class ProductsService {
 	}
 
 	// 商品一件作成
-	public Product create(Product product) {
+	public Product create(String name,String introduction, Integer price,MultipartFile file) {
+		Product product = new Product();
+		product.setName(name);
+		product.setIntroduction(introduction);
+		product.setPrice(price);
+		product.setImageUrl(file.getOriginalFilename());
+		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
+			throw new RuntimeException("Error uploading file.", e);
+		}
 		return repository.save(product);
 	}
 
 	// 商品一件更新
-	public Product update(Product product) {
+	public Product update(Integer id,String name,String introduction, Integer price,MultipartFile file ) {
+		Product product = repository.findOne(id);
+		if(product == null) return null;
+		product.setName(name);
+		product.setIntroduction(introduction);
+		product.setPrice(price);
+		product.setImageUrl(file.getOriginalFilename());
+		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
+			throw new RuntimeException("Error uploading file.", e);
+		}
 		return repository.save(product);
 	}
 

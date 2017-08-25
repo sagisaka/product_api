@@ -1,14 +1,9 @@
 package com.spring.app.controller.rest;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,19 +57,7 @@ public class ProductsRestController {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		Product product = new Product();
-		product.setName(name);
-		product.setIntroduction(introduction);
-		product.setPrice(price);
-		product.setImageUrl(file.getOriginalFilename());
-		product.setId(id);
-		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
-			FileCopyUtils.copy(in, out);
-		} catch (IOException e) {
-			throw new RuntimeException("Error uploading file.", e);
-		}
-		return service.update(product);
+		return service.update(id,name,introduction,price,file);
 	}
 
 	// 商品一件削除
@@ -91,19 +74,6 @@ public class ProductsRestController {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		Product product = new Product();
-		product.setName(name);
-		product.setIntroduction(introduction);
-		product.setPrice(price);
-		product.setImageUrl(file.getOriginalFilename());
-		service.create(product);
-		// アップロードされたファイルを保存。
-		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
-			FileCopyUtils.copy(in, out);
-		} catch (IOException e) {
-			throw new RuntimeException("Error uploading file.", e);
-		}
-		return product;
+		return service.create(name,introduction,price,file);
 	}
 }
