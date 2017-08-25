@@ -24,7 +24,7 @@ public class ProductsRestController {
 	private ProductsService service;
 
 	// 商品全件取得
-	@GetMapping(value="/all")
+	@GetMapping
 	public List<Product> getproduct() {
 		return service.findAll();
 	}
