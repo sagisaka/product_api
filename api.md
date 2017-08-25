@@ -5,7 +5,7 @@
 |商品一件取得|GET|/api/product/{id}|
 |商品一件更新|POST|/api/product/{id}|
 |商品一件削除|DELETE|/api/product/{id}|
-|商品全件取得|GET|/api/product/all|
+|商品全件取得|GET|/api/product/|
 |商品取得|POST|/api/product/sam|
 
 ## APIの詳細
@@ -31,8 +31,8 @@
 |ステータス|説明|
 |---|---|
 |201|商品の登録が成功する|
-|300|name introduction price imageUrlのいずれかが空データならば"〇〇を入力してください"とエラー内容を返却する|
-|300|priceが文字列ならば"数値を入力してください"とエラー内容を返却する|
+|400|name introduction price imageUrlのいずれかが空データならば"〇〇を入力してください"とエラー内容を返却する|
+|400|priceが文字列ならば"数値を入力してください"とエラー内容を返却する|
 |400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
 |500|送信内容が空データならBAD_REQUESTを返却する|
 
@@ -51,7 +51,7 @@
 |ステータス|説明|
 |---|---|
 |200|登録されたidならば登録されたデータを取得する|
-|301|登録されていないidならば空データを取得する|
+|400|登録されていないidならば空データを取得する|
 |400|受け取れなければ"Server Error. Pleasy try again later."とエラー内容を返却する|
 
 
@@ -70,8 +70,8 @@
 |ステータス|説明|
 |---|---|
 |201|formデータで送信するため上書きで登録する|
-|300|name introduction price imageUrlのいずれかが空データならば"〇〇を入力してください"とエラー内容を返却する|
-|300|priceが文字列ならば"数値を入力してください"とエラー内容を返却する|
+|400|name introduction price imageUrlのいずれかが空データならば"〇〇を入力してください"とエラー内容を返却する|
+|400|priceが文字列ならば"数値を入力してください"とエラー内容を返却する|
 |400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
 |500|送信内容が空データならBAD_REQUESTを返却する|
 
@@ -105,7 +105,7 @@
 |ステータス|説明|
 |---|---|
 |200|登録されたid全てのデータを取得する|
-|300|登録されていないならば空データを取得する|
+|400|登録されていないならば空データを取得する|
 |400|受け取れなければ"Server Error. Pleasy try again later."とエラー内容を返却する|
 
 
@@ -131,7 +131,7 @@
 |ステータス|説明|
 |---|---|
 |200|取得したいデータを取得する|
-|300|該当しなければ空データを返す|
+|400|該当しなければ空データを返す|
 |400|受け取れなければ"Server Error. Pleasy try again later."とエラー内容を返却する|
 |400|nameの文字数が100以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
 
