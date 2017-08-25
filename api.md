@@ -36,10 +36,6 @@
 |400|nameの文字数が100以上もしくはintroductionの文字数が500以上ならば"Server Error. Pleasy try again later."とエラー内容を返却する|
 |400|送信内容が空データなら400を返却する|
 
-
-*Webページ上でのアラート
-
-
 ### 商品一件取得
 * GETデータ
 
