@@ -61,7 +61,7 @@ DBに登録すると、商品のタイトルや価格の一覧が表として書
 |商品一件取得|GET|/api/product/{id}|
 |商品一件更新|POST|/api/product/{id}|
 |商品一件削除|DELETE|/api/product/{id}|
-|商品全件取得|GET|/api/product/all|
+|商品全件取得|GET|/api/product/|
 |商品取得|POST|/api/product/sam|
 
 ## ページ一覧
