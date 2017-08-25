@@ -8,6 +8,8 @@
 |商品全件取得|GET|/api/product/|
 |商品取得|POST|/api/product/sam|
 
+{id}の中身はInteger型のみを受け付ける
+
 ## APIの詳細
 
 ### 存在するリソースパス以外の場合
