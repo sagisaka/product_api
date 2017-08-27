@@ -1,5 +1,6 @@
 package com.spring.app.controller.rest;
 
+import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,23 @@ public class ProductsRestController {
 
 	// 商品全件取得
 	@GetMapping
-	public List<Product> getproduct() {
-		return service.findAll();
+	public List<Product> getproduct(HttpServletResponse response) throws IOException {
+		List<Product> products = service.findAll();
+		if(products.isEmpty()){
+			response.sendError(HttpStatus.BAD_REQUEST.value());
+		}
+		return products;
 	}
 
 	// 商品一件取得
-	@GetMapping(value="{id}")
-	public Product getProduct(@PathVariable String id) {
-		try {
-			Product product = service.findOne(Integer.parseInt(id));
-			if(product == null){
-				product = new Product();
-				return product;
-			}
-			return product;
-		} catch (NumberFormatException e) {
-			return new Product();
-		}		
-	}
+	@GetMapping(value="{id:[0-9]+$}")
+	public Product getProduct(@PathVariable Integer id,HttpServletResponse response) throws IOException {
+		Product product = service.findOne(id);
+		if(product == null){
+			response.sendError(HttpStatus.BAD_REQUEST.value());
+		}
+		return product;
+	} 	
 
 	//　商品取得
 	@PostMapping(value="/sam")
@@ -52,12 +52,8 @@ public class ProductsRestController {
 
 	// 商品一件更新
 	@PostMapping(value="{id:[0-9]+$}")
-	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam Integer price,@RequestParam MultipartFile file) {
-		if (file.isEmpty()) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return null;
-		}
-		return service.update(id,name,introduction,price,file);
+	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam Integer price,@RequestParam MultipartFile file) throws IOException {
+		return service.update(id,name,introduction,price,file,response);
 	}
 
 	// 商品一件削除
@@ -69,11 +65,7 @@ public class ProductsRestController {
 
 	// 商品一件登録
 	@PostMapping
-	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam Integer price,@RequestParam MultipartFile file){
-		if (file.isEmpty()) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return null;
-		}
-		return service.create(name,introduction,price,file);
+	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam Integer price,@RequestParam MultipartFile file) throws IOException{
+		return service.create(name,introduction,price,file,response);
 	}
 }
