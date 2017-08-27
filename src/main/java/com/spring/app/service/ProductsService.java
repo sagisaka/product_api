@@ -40,7 +40,7 @@ public class ProductsService {
 	}
 
 	// 商品一件作成
-	public Product create(String name,String introduction, Integer price,MultipartFile file,HttpServletResponse response) throws IOException {
+	public Product create(String name,String introduction, String price,MultipartFile file,HttpServletResponse response) throws IOException {
 		if (file.isEmpty()) {
 			response.sendError(HttpStatus.BAD_REQUEST.value());
 		}
@@ -59,7 +59,7 @@ public class ProductsService {
 	}
 
 	// 商品一件更新
-	public Product update(Integer id,String name,String introduction, Integer price,MultipartFile file, HttpServletResponse response) throws IOException {
+	public Product update(Integer id,String name,String introduction, String price,MultipartFile file, HttpServletResponse response) throws IOException {
 		Product product = repository.findOne(id);
 		if (file.isEmpty() || product == null) {
 			response.sendError(HttpStatus.BAD_REQUEST.value());

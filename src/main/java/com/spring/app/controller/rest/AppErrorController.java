@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -48,7 +49,7 @@ public class AppErrorController implements ErrorController {
 		  }
 	
 	@RequestMapping
-	public Map<String, Object> erroar(HttpServletRequest aRequest){
+	public Map<String, Object> getErrorBasic(HttpServletRequest aRequest){
 		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
 		body.put("message", "要求の形式が正しくありません");
 		if(body.get("status").equals(HttpStatus.NOT_FOUND.value())){
@@ -59,9 +60,9 @@ public class AppErrorController implements ErrorController {
 	}
 
 	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-	@org.springframework.web.bind.annotation.ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	@ResponseBody
-	public Map<String, Object> handleError(HttpServletRequest aRequest){
+	public Map<String, Object> getErrorRequest(HttpServletRequest aRequest){
 		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
 		body.remove("exception");
 		body.put("status", HttpStatus.METHOD_NOT_ALLOWED.value());

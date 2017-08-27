@@ -52,7 +52,7 @@ public class ProductsRestController {
 
 	// 商品一件更新
 	@PostMapping(value="{id:[0-9]+$}")
-	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam Integer price,@RequestParam MultipartFile file) throws IOException {
+	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) throws IOException {
 		return service.update(id,name,introduction,price,file,response);
 	}
 
@@ -65,7 +65,7 @@ public class ProductsRestController {
 
 	// 商品一件登録
 	@PostMapping
-	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam Integer price,@RequestParam MultipartFile file) throws IOException{
+	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) throws IOException{
 		return service.create(name,introduction,price,file,response);
 	}
 }
