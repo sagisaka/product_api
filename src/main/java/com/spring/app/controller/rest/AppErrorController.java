@@ -9,7 +9,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
@@ -61,13 +60,23 @@ public class AppErrorController implements ErrorController {
 
 	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	@ResponseBody
 	public Map<String, Object> getErrorRequest(HttpServletRequest aRequest){
 		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
 		body.remove("exception");
 		body.put("status", HttpStatus.METHOD_NOT_ALLOWED.value());
 		body.put("message", "許可されていないメソッドです");
 		body.put("error", "Method Not Allowed");
+		return body;
+	}
+	
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+	@ExceptionHandler(Exception.class)
+	public Map<String, Object> getAnotherErrorRequest(HttpServletRequest aRequest){
+		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
+		body.remove("exception");
+		body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+		body.put("message", "サーバーエラーです");
+		body.put("error", "Internal Server Error");
 		return body;
 	}
 }
