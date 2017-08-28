@@ -70,7 +70,7 @@ public class AppErrorController implements ErrorController {
 		return body;
 	}
 
-	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public Map<String, Object> getAnotherErrorRequest(HttpServletRequest aRequest){
 		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
