@@ -42,7 +42,7 @@ public class ProductsService {
 	// 商品一件作成
 	public Product create(String name,String introduction, String price,MultipartFile file,HttpServletResponse response) throws IOException {
 		if (file.isEmpty()) {
-			response.sendError(HttpStatus.BAD_REQUEST.value());
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
 		}
 		Product product = new Product();
 		product.setName(name);
@@ -61,8 +61,10 @@ public class ProductsService {
 	// 商品一件更新
 	public Product update(Integer id,String name,String introduction, String price,MultipartFile file, HttpServletResponse response) throws IOException {
 		Product product = repository.findOne(id);
-		if (file.isEmpty() || product == null) {
-			response.sendError(HttpStatus.BAD_REQUEST.value());
+		if (file.isEmpty()) {
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
+		}else if(product == null){
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"データが見つかりませんでした");
 		}
 		product.setName(name);
 		product.setIntroduction(introduction);

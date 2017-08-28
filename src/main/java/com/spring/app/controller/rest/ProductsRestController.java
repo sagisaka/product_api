@@ -29,7 +29,7 @@ public class ProductsRestController {
 	public List<Product> getproduct(HttpServletResponse response) throws IOException {
 		List<Product> products = service.findAll();
 		if(products.isEmpty()){
-			response.sendError(HttpStatus.BAD_REQUEST.value());
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"データが見つかりませんでした");
 		}
 		return products;
 	}
@@ -39,7 +39,7 @@ public class ProductsRestController {
 	public Product getProduct(@PathVariable Integer id,HttpServletResponse response) throws IOException {
 		Product product = service.findOne(id);
 		if(product == null){
-			response.sendError(HttpStatus.BAD_REQUEST.value());
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"データが見つかりませんでした");
 		}
 		return product;
 	} 	

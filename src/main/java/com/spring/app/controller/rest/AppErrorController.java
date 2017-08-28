@@ -35,26 +35,27 @@ public class AppErrorController implements ErrorController {
 	}
 
 	private boolean getTraceParameter(HttpServletRequest request) {
-	    String parameter = request.getParameter("trace");
-	    if (parameter == null) {
-	        return false;
-	    }
-	    return !"false".equals(parameter.toLowerCase());
-	  }
-	
-	 private Map<String, Object> getErrorAttributes(HttpServletRequest aRequest, boolean includeStackTrace) {
-		    RequestAttributes requestAttributes = new ServletRequestAttributes(aRequest);
-		    return errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
-		  }
-	
+		String parameter = request.getParameter("trace");
+		if (parameter == null) {
+			return false;
+		}
+		return !"false".equals(parameter.toLowerCase());
+	}
+
+	private Map<String, Object> getErrorAttributes(HttpServletRequest aRequest, boolean includeStackTrace) {
+		RequestAttributes requestAttributes = new ServletRequestAttributes(aRequest);
+		return errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
+	}
+
 	@RequestMapping
 	public Map<String, Object> getErrorBasic(HttpServletRequest aRequest){
 		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
-		body.put("message", "要求の形式が正しくありません");
+		body.remove("path");
 		if(body.get("status").equals(HttpStatus.NOT_FOUND.value())){
 			body.put("status",HttpStatus.NOT_FOUND.value());
 			body.put("message", "ページが見つかりませんでした");
-			body.put("error", "Not Found");		}
+			body.put("error", "Not Found");		
+			}
 		return body;
 	}
 
@@ -68,14 +69,13 @@ public class AppErrorController implements ErrorController {
 		body.put("error", "Method Not Allowed");
 		return body;
 	}
-	
+
 	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	@ExceptionHandler(Exception.class)
 	public Map<String, Object> getAnotherErrorRequest(HttpServletRequest aRequest){
 		Map<String, Object> body = getErrorAttributes(aRequest,getTraceParameter(aRequest));
 		body.remove("exception");
 		body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-		body.put("message", "サーバーエラーです");
 		body.put("error", "Internal Server Error");
 		return body;
 	}
