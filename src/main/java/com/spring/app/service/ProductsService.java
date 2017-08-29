@@ -64,7 +64,7 @@ public class ProductsService {
 		if (file.isEmpty()) {
 			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
 		}else if(product == null){
-			response.sendError(HttpStatus.BAD_REQUEST.value(),"データが見つかりませんでした");
+			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");
 		}
 		product.setName(name);
 		product.setIntroduction(introduction);

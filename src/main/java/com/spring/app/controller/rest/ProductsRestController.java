@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.spring.app.model.Product;
@@ -29,7 +28,7 @@ public class ProductsRestController {
 	public List<Product> getproduct(HttpServletResponse response) throws IOException {
 		List<Product> products = service.findAll();
 		if(products.isEmpty()){
-			response.sendError(HttpStatus.BAD_REQUEST.value(),"データが見つかりませんでした");
+			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");
 		}
 		return products;
 	}
@@ -39,15 +38,19 @@ public class ProductsRestController {
 	public Product getProduct(@PathVariable Integer id,HttpServletResponse response) throws IOException {
 		Product product = service.findOne(id);
 		if(product == null){
-			response.sendError(HttpStatus.BAD_REQUEST.value(),"データが見つかりませんでした");
+			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");
 		}
 		return product;
 	} 	
 
 	//　商品取得
 	@PostMapping(value="/sam")
-	public List<Product> getValueproduct(@RequestBody Product product) {
-		return service.find(product.getName());
+	public List<Product> getValueproduct(HttpServletResponse response, @RequestBody Product product) throws IOException {
+		List<Product> products = service.find(product.getName());
+		if(products.isEmpty()){
+			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");
+		}
+		return products;
 	}
 
 	// 商品一件更新
@@ -58,7 +61,6 @@ public class ProductsRestController {
 
 	// 商品一件削除
 	@DeleteMapping(value="{id:[0-9]+$}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteproduct(@PathVariable Integer id) {
 		service.delete(id);
 	}

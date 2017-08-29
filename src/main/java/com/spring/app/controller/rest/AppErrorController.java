@@ -53,9 +53,11 @@ public class AppErrorController implements ErrorController {
 		body.remove("path");
 		if(body.get("status").equals(HttpStatus.NOT_FOUND.value())){
 			body.put("status",HttpStatus.NOT_FOUND.value());
-			body.put("message", "ページが見つかりませんでした");
-			body.put("error", "Not Found");		
+			if(body.get("message").equals("No message available")){ 
+				body.put("message", "ページが見つかりませんでした");
 			}
+			body.put("error", "Not Found");		
+		}
 		return body;
 	}
 
