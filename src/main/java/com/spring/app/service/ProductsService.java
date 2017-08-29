@@ -41,7 +41,10 @@ public class ProductsService {
 
 	// 商品一件作成
 	public Product create(String name,String introduction, String price,MultipartFile file,HttpServletResponse response) throws IOException {
-		if (file.isEmpty()) {
+		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
 			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
 		}
 		Product product = new Product();
@@ -49,33 +52,25 @@ public class ProductsService {
 		product.setIntroduction(introduction);
 		product.setPrice(price);
 		product.setImageUrl(file.getOriginalFilename());
-		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
-			FileCopyUtils.copy(in, out);
-		} catch (IOException e) {
-			throw new RuntimeException("Error uploading file.", e);
-		}
 		return repository.save(product);
 	}
 
 	// 商品一件更新
 	public Product update(Integer id,String name,String introduction, String price,MultipartFile file, HttpServletResponse response) throws IOException {
 		Product product = repository.findOne(id);
-		if (file.isEmpty()) {
-			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
-		}else if(product == null){
+		if(product == null){
 			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");
+		}
+		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
 		}
 		product.setName(name);
 		product.setIntroduction(introduction);
 		product.setPrice(price);
 		product.setImageUrl(file.getOriginalFilename());
-		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
-			FileCopyUtils.copy(in, out);
-		} catch (IOException e) {
-			throw new RuntimeException("Error uploading file.", e);
-		}
 		return repository.save(product);
 	}
 

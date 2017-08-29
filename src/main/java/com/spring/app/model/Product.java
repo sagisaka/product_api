@@ -26,21 +26,21 @@ public class Product {
 	private Integer id;
 
 	@Column(nullable=false)
-	@NotBlank
-	@Size(max=100)
+	@NotBlank(message = "文字を入力してください")
+	@Size(max=100,message = "名前を100字以下にしてください")
 	private String name;
 
 	@Column(nullable=false)
-	@NotBlank
-	@Size(max=500)
+	@NotBlank(message = "文字を入力してください")
+	@Size(max=500,message = "説明を500字以下にしてください")
 	private String introduction;
 
 	@Column(nullable=false)
-	@NotBlank
-	@Pattern(regexp="[0-9]+$")
+	@NotBlank(message = "文字を入力してください")
+	@Pattern(regexp="[0-9]+$",message = "価格を数字にしてください")
 	private String price;
 
 	@Column(nullable=false)
-	@NotBlank
+	@NotBlank(message = "文字を入力してください")
 	private String imageUrl;
 }
