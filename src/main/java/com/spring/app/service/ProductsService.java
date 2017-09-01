@@ -41,6 +41,13 @@ public class ProductsService {
 
 	// 商品一件作成
 	public Product create(String name,String introduction, String price,MultipartFile file,HttpServletResponse response) throws IOException {
+		//綺麗にしたい
+		if(name.equals("")||introduction.equals("")||price.equals("")) response.sendError(HttpStatus.BAD_REQUEST.value());
+		try{
+			Integer.parseInt(price);
+		} catch (NumberFormatException e) {
+			response.sendError(HttpStatus.BAD_REQUEST.value());
+		}
 		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
 				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
 			FileCopyUtils.copy(in, out);
@@ -57,6 +64,13 @@ public class ProductsService {
 
 	// 商品一件更新
 	public Product update(Integer id,String name,String introduction, String price,MultipartFile file, HttpServletResponse response) throws IOException {
+		//綺麗にしたい
+		if(name.equals("")||introduction.equals("")||price.equals("")) response.sendError(HttpStatus.BAD_REQUEST.value());
+		try{
+			Integer.parseInt(price);
+		} catch (NumberFormatException e) {
+			response.sendError(HttpStatus.BAD_REQUEST.value());
+		}
 		Product product = repository.findOne(id);
 		if(product == null){
 			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");

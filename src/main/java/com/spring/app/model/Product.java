@@ -28,7 +28,7 @@ public class Product {
 	@Column(nullable=false)
 	@NotBlank(message = "文字を入力してください")
 	@Size(max=100,message = "名前を100字以下にしてください")
-	private String name;
+	private String name=null;
 
 	@Column(nullable=false)
 	@NotBlank(message = "文字を入力してください")
