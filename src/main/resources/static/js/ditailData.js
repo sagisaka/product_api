@@ -45,7 +45,7 @@ function updata() {
 			cache: false,
 			dataType: 'json',
 			success: function(json_data) {
-				location.reload();
+				document.location = "/";
 			},
 			error: function() {         // HTTPエラー時
 				alert("Server Error. Pleasy try again later.");

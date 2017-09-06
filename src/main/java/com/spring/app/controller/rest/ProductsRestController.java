@@ -1,10 +1,17 @@
 package com.spring.app.controller.rest;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,8 +62,20 @@ public class ProductsRestController {
 
 	// 商品一件更新
 	@PostMapping(value="{id:[0-9]+$}")
-	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) throws IOException {
-		return service.update(id,name,introduction,price,file,response);
+	public Product putproduct(@PathVariable Integer id, HttpServletResponse response, @Valid Product anotherProduct, BindingResult result, @RequestParam MultipartFile file) throws IOException {
+		if (result.hasErrors()) response.sendError(HttpStatus.BAD_REQUEST.value(),"空文字か値段が文字列です");
+		Product product = service.findOne(id);
+		if(product == null){
+			response.sendError(HttpStatus.NOT_FOUND.value(),"データが見つかりませんでした");
+		}
+		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
+			response.sendError(HttpStatus.BAD_REQUEST.value(),"ファイルが見つかりませんでした");
+			return null;
+		}
+		return service.update(id,product,anotherProduct,file.getOriginalFilename());
 	}
 
 	// 商品一件削除
@@ -67,7 +86,15 @@ public class ProductsRestController {
 
 	// 商品一件登録
 	@PostMapping
-	public Product handle(HttpServletResponse response, @RequestParam String name, @RequestParam String introduction, @RequestParam String price,@RequestParam MultipartFile file) throws IOException{
-		return service.create(name,introduction,price,file,response);
+	public Product handle(HttpServletResponse response, @Valid Product product, BindingResult result, @RequestParam MultipartFile file) throws IOException{
+		if (result.hasErrors()) response.sendError(HttpStatus.BAD_REQUEST.value(),"空文字か値段が文字列です");
+		try(BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("src/main/resources/static/image/" + file.getOriginalFilename()))) {
+			FileCopyUtils.copy(in, out);
+		} catch (IOException e) {
+			response.sendError(HttpStatus.NOT_FOUND.value(),"ファイルが見つかりませんでした");
+			return null;
+		}
+		return service.create(product,file.getOriginalFilename());
 	}
 }
