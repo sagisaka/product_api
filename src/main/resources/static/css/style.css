@@ -8,7 +8,7 @@ ul#menu {
 	font-weight: bold;
 }
 
-li#menu01, li#menu02 {
+li#menu01, li#menu02, li#menu03 {
 	float: left; /*リスト項目を横に並べる*/
 	display: inline; /*リスト項目をインライン表示にする*/
 	list-style-type: none; /*リストマーカー無しにする*/
@@ -24,6 +24,12 @@ li#menu02 {
 	width: 164px;
 	height: 42px;
 	background: #CCFF33;
+}
+
+li#menu03 {
+	width: 164px;
+	height: 42px;
+	background: #FFC0CB;
 }
 
 ul#menu a {
